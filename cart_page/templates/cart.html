@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Basket
+{% endblock %}
+
+{% block head %}
+    <script src="{{ url_for('cart.static', filename='js/write_cookies.js') }}" defer></script>
+
+    <link rel="stylesheet" href="{{ url_for('cart.static', filename= '/css/cart.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="already-auth">
+        <div class="pages">
+            <a href="/">HOME</a>
+            <a href="/shop/" class="shop-page">SHOP</a>
+            <a href="/cart/">CART</a>
+            <a href="/contacts/">CONTACTS</a>
+            {% if is_admin %}
+                <a href="/admin/">ADMIN</a>
+            {% endif %}
+            
+
+
+            {% if valuetf %}
+                <div class="cart-value1">
+                    <h3 class="cart-value">0</h3>
+                </div>
+            {% endif %}
+        </div> 
+        <!-- {% if valuetf %}
+            <div class="cart-value">
+                <h3>{{ count_of_products }}</h3>
+            </div>
+        {% endif %} -->
+        <h2>{{user}}</h2>
+    {% if check_basket %}
+        </div>
+            <div class="basket-menu">
+                <div class="basket-of-products">
+                    {% for product in products %}
+                        {% if product[1] == "iPhone" %}
+                            <div class="product-in-basket">
+                                <img src="{{ url_for('shop.static', filename= '/imgs/iPhoneTitanic.png') }}">
+                
+                                <h1 class="name-of-product">iPhone 15 Pro Max 256GB Natural Titanium</h1>
+                                <div class="counter-of-product">    
+                                    <button class="minus-count" id="1">-</button>
+                                    <p class="count-of-product" id="1">{{ product[0] }}</p>
+                                    <button class="plus-count" id="1">+</button>
+                                </div>
+                
+                                <p class="price-of-product">49 999 грн</p>
+                            </div>
+                        {% elif product[1] == "Vivo" %}
+                            <div class="product-in-basket">
+                                <img src="{{ url_for('shop.static', filename= '/imgs/VivoV9.png') }}">
+                
+                                <h1 class="name-of-product">SmartPhone Vivo V9</h1>
+                                <div class="counter-of-product">
+                                    <p class="count-of-product" id="2">{{ product[0] }}</p>
+                                    <button class="minus-count" id="2">-</button>
+                                    <button class="plus-count" id="2">+</button>
+                                </div>
+                
+                                <p class="price-of-product">4 999 грн</p>
+                            </div>
+
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </div>
+
+
+        
+        <div class = "order">
+            <button class="continie-order">Перейти до оформлення</button>
+            <div class="original-price">
+                <p class="original-count"></p>
+                <h4 class="original-price-p"></h4>
+            </div>
+            <div class="discount">
+                <p class="discount-p1">Знижка</p>
+                <h4 class="discount-p">0 грн</h4>
+            </div>
+            <div class="total-price">
+                <p class="ttl-prc-p1">Загальна сума</p>
+                <h4 class="total-price-p"></h4>
+            </div>
+        </div>
+        
+
+    {% else %}
+    <div class="basket-menu">
+        <h1>Ваша корзина порожня...</h1>
+    </div>
+    {% endif %}
+{% endblock %}
+
